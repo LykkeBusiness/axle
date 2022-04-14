@@ -48,7 +48,18 @@ namespace Axle.Services
             bool isSupportUser,
             bool isConcurrentConnection)
         {
+            if (context.GetHttpContext().Request.Cookies.TryGetValue("axle.session.id", out string sessionIdFromCookie))
+            {
+                logger.LogInformation($"Got a session id from cookie: {sessionIdFromCookie}");
+            }
+            else
+            {
+                logger.LogInformation($"There was no session id in cookie");
+            }
+            
             var session = await sessionService.BeginSession(userName, accountId, clientId, accessToken, isSupportUser);
+            
+            context.GetHttpContext().Response.Cookies.Append("axle.session.id", session.SessionId.ToString());
 
             connectionRepository.Add(context.ConnectionId, context);
             sessionIdRepository.Add(context.ConnectionId, session.SessionId);
