@@ -48,9 +48,6 @@ namespace Axle.Services
             bool isSupportUser,
             bool isConcurrentConnection)
         {
-            var aspnetSession = context?.GetHttpContext()?.Session;
-            logger.LogInformation($"Asp Net Session information for client id {clientId}: id = {aspnetSession?.Id}, keys = {string.Join(',', aspnetSession?.Keys ?? Enumerable.Empty<string>())}");
-            
             var session = await sessionService.BeginSession(userName, accountId, clientId, accessToken, isSupportUser);
 
             connectionRepository.Add(context.ConnectionId, context);
