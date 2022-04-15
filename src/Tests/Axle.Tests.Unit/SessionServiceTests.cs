@@ -57,8 +57,8 @@ namespace Axle.Tests.Unit
 
             Assert.Equal(session1.SessionId, session2.SessionId);
             Assert.Equal(2, session2.AccessTokens.Length);
-            Assert.True(session2.AccessTokens.Contains("token1"));
-            Assert.True(session2.AccessTokens.Contains("token2"));
+            Assert.Contains("token1", session2.AccessTokens);
+            Assert.Contains("token2", session2.AccessTokens);
         }
 
         [Theory]
