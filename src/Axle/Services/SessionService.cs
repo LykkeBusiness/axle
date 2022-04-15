@@ -44,26 +44,30 @@ namespace Axle.Services
             string accountId,
             string clientId,
             string accessToken,
-            bool isSupportUser)
+            bool isSupportUser,
+            string deviceKey)
         {
             await slimLock.WaitAsync();
 
             try
             {
-                var userInfo = isSupportUser 
+                var existingSession = isSupportUser 
                     ? await sessionRepository.GetByUser(userName) 
                     : await sessionRepository.GetByAccount(accountId);
-
-                if (userInfo != null && userInfo.AccessToken == accessToken)
+                
+                if (existingSession?.SameDevice(deviceKey) ?? false)
                 {
-                    logger.LogDebug($"Session resolved by existing cache. {nameof(userName)}: {userName}, {nameof(accountId)}: {accountId}, {nameof(userInfo.SessionId)}: {userInfo.SessionId}, {nameof(userInfo.IsSupportUser)}: {userInfo.IsSupportUser}.");
+                    existingSession = existingSession.AddToken(accessToken);
+                    await sessionRepository.Update(existingSession);
                     
-                    return userInfo;
+                    logger.LogDebug($"Session resolved by existing cache. {nameof(userName)}: {userName}, {nameof(accountId)}: {accountId}, {nameof(existingSession.SessionId)}: {existingSession.SessionId}, {nameof(existingSession.IsSupportUser)}: {existingSession.IsSupportUser}.");
+                    
+                    return existingSession;
                 }
 
                 var sessionId = await GenerateSessionId();
 
-                var newSession = new Session(userName, sessionId, accountId, accessToken, clientId, isSupportUser);
+                var newSession = new Session(userName, sessionId, accountId, accessToken, clientId, isSupportUser, deviceKey);
 
                 await sessionRepository.Add(newSession);
 
@@ -76,9 +80,9 @@ namespace Axle.Services
                     await MakeAndPublishOnBehalfActivity(SessionActivityType.OnBehalfSupportConnected, newSession);
                 }
 
-                if (userInfo != null)
+                if (existingSession != null)
                 {
-                    await TerminateSession(userInfo, SessionActivityType.DifferentDeviceTermination);
+                    await TerminateSession(existingSession, SessionActivityType.DifferentDeviceTermination);
                     logger.LogWarning(StatusCode.IF_ATH_502.ToMessage());
                 }
 
@@ -127,7 +131,7 @@ namespace Axle.Services
                     }
                 }
 
-                var newSession = new Session(session.UserName, session.SessionId, onBehalfAccount, session.AccessToken, session.ClientId, session.IsSupportUser);
+                var newSession = new Session(session.UserName, session.SessionId, onBehalfAccount, session.AccessTokens, session.ClientId, session.IsSupportUser, session.DeviceKey);
 
                 await sessionRepository.Update(newSession);
 
@@ -214,7 +218,10 @@ namespace Axle.Services
 
             if (reason != SessionActivityType.SignOut)
             {
-                await tokenRevocationService.RevokeAccessToken(userInfo.AccessToken, userInfo.ClientId);
+                foreach (var accessToken in userInfo.AccessTokens)
+                {
+                    await tokenRevocationService.RevokeAccessToken(accessToken, userInfo.ClientId);    
+                }
             }
 
             await notificationService.PublishSessionTermination(new TerminateSessionNotification() { SessionId = userInfo.SessionId, Reason = reason });
