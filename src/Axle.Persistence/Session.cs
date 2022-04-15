@@ -7,7 +7,7 @@ namespace Axle.Persistence
     using MessagePack;
 
     [MessagePackObject]
-    public class Session
+    public sealed class Session
     {
         [SerializationConstructor]
         public Session(
