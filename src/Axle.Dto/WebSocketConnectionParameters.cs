@@ -3,19 +3,16 @@ using JetBrains.Annotations;
 
 namespace Axle.Dto
 {
-    public class WebSocketConnectionParameters
+    public abstract class WebSocketConnectionParameters
     {
-        public WebSocketConnectionParameters(string accountId,
+        private protected WebSocketConnectionParameters(string accountId,
             string accessToken,
             [CanBeNull] string deviceSessionKey,
             bool isConcurrentConnection)
         {
-            if (string.IsNullOrWhiteSpace(accountId))
-                throw new ArgumentNullException(nameof(accountId));
-            
             if (string.IsNullOrWhiteSpace(accessToken))
                 throw new ArgumentNullException(nameof(accessToken));
-            
+
             AccountId = accountId;
             AccessToken = accessToken;
             DeviceSessionKey = deviceSessionKey;
@@ -35,12 +32,20 @@ namespace Axle.Dto
         /// <summary>
         /// Unique device session key
         /// </summary>
-        [CanBeNull] public string DeviceSessionKey { get; }
+        [CanBeNull]
+        public string DeviceSessionKey { get; }
 
         /// <summary>
         /// Specific flag passed by the client to designate if web socket connection is concurrent therefore existing
         /// connections would not be closed
         /// </summary>
         public bool IsConcurrentConnection { get; }
+
+        /// <summary>
+        /// Indicates if connection supposed to be established for support user account
+        /// </summary>
+        public bool IsSupportUser => GetIsSupportUser();
+
+        protected abstract bool GetIsSupportUser();
     }
 }

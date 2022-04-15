@@ -1,3 +1,4 @@
+using System;
 using Axle.Dto;
 using Microsoft.AspNetCore.Http;
 
@@ -9,17 +10,16 @@ namespace Axle.Extensions
         internal static readonly string AccountIdParameterName = "account_id";
         internal static readonly string AccessTokenParameterName = "access_token";
         internal static readonly string DeviceSessionKeyParameterName = "device_session_key";
-        
-        public static WebSocketConnectionParameters ValidateWebSocketConnection(this IQueryCollection query)
+
+        public static WebSocketConnectionParameters ValidateWebSocketConnection(this IQueryCollection query,
+            bool isSupportUser)
         {
             if (!bool.TryParse(query[ConcurrentConnectionParameterName], out var isConcurrentConnection))
                 isConcurrentConnection = false;
 
-            return new WebSocketConnectionParameters(
-                query[AccountIdParameterName],
-                query[AccessTokenParameterName],
-                query[DeviceSessionKeyParameterName],
-                isConcurrentConnection);
+            return isSupportUser
+                ? CreateConnectionParameters<SupportWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection)
+                : CreateConnectionParameters<InvestorWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection);
         }
 
         public static bool IsAccountIdEmpty(this IQueryCollection query)
@@ -28,5 +28,12 @@ namespace Axle.Extensions
 
             return string.IsNullOrWhiteSpace(accountId);
         }
+
+        private static T CreateConnectionParameters<T>(string accountId,
+            string accessToken,
+            string deviceSessionKey,
+            bool isConcurrentConnection) where T : WebSocketConnectionParameters =>
+            (T)Activator.CreateInstance(typeof(T),
+                new object[] { accountId, accessToken, deviceSessionKey, isConcurrentConnection });
     }
 }

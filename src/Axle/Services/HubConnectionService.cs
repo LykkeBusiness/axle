@@ -43,14 +43,13 @@ namespace Axle.Services
             HubCallerContext context,
             string userName,
             string clientId,
-            bool isSupportUser,
             WebSocketConnectionParameters connectionParameters)
         {
             var session = await sessionService.BeginSession(userName,
                 connectionParameters.AccountId,
                 clientId,
                 connectionParameters.AccessToken,
-                isSupportUser,
+                connectionParameters.IsSupportUser,
                 connectionParameters.DeviceSessionKey);
 
             connectionRepository.Add(context.ConnectionId, context);
