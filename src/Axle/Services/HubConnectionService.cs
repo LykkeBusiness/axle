@@ -42,22 +42,25 @@ namespace Axle.Services
         public async Task OpenConnection(
             HubCallerContext context,
             string userName,
-            string accountId,
             string clientId,
-            string accessToken,
             bool isSupportUser,
-            bool isConcurrentConnection)
+            WebSocketConnectionParameters connectionParameters)
         {
-            var session = await sessionService.BeginSession(userName, accountId, clientId, accessToken, isSupportUser);
-            
+            var session = await sessionService.BeginSession(userName,
+                connectionParameters.AccountId,
+                clientId,
+                connectionParameters.AccessToken,
+                isSupportUser,
+                connectionParameters.DeviceSessionKey);
+
             connectionRepository.Add(context.ConnectionId, context);
             sessionIdRepository.Add(context.ConnectionId, session.SessionId);
 
-            if (!isConcurrentConnection)
+            if (!connectionParameters.IsConcurrentConnection)
             {
                 var terminateOtherTabs = new TerminateOtherTabsNotification
                 {
-                    AccessToken = accessToken,
+                    AccessToken = connectionParameters.AccessToken,
                     OriginatingConnectionId = context.ConnectionId,
                     OriginatingServiceId = AxleConstants.ServiceId
                 };

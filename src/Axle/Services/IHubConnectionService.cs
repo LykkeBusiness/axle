@@ -13,11 +13,9 @@ namespace Axle.Services
         Task OpenConnection(
             HubCallerContext context,
             string userName,
-            string accountId,
             string clientId,
-            string accessToken,
             bool isSupportUser,
-            bool isConcurrentConnection);
+            WebSocketConnectionParameters connectionParameters);
 
         void CloseConnection(string connectionId);
 

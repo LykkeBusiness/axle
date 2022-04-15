@@ -9,10 +9,8 @@ namespace Axle.Extensions
 
     public static class ClaimsPrincipalExtensions
     {
-        public static bool IsSupportUser(this ClaimsPrincipal principal, string accountId)
+        public static bool IsSupportUser(this ClaimsPrincipal principal, bool accountIdEmpty)
         {
-            var accountIdEmpty = string.IsNullOrWhiteSpace(accountId);
-
             var isOnBehalf = !accountIdEmpty && principal.HasClaim(Permissions.OnBehalfSelection, Permissions.OnBehalfSelection);
             var isSupport = accountIdEmpty && principal.HasClaim(Permissions.StartSessionWithoutAcc, Permissions.StartSessionWithoutAcc);
 

@@ -30,7 +30,7 @@ namespace Axle.Authorization
 
             var isAccountOwner = !accountIdEmpty && IsAccountOwner(context, accountId);
 
-            if (isAccountOwner || context.User.IsSupportUser(accountId))
+            if (isAccountOwner || context.User.IsSupportUser(accountIdEmpty))
             {
                 // Accounts for the case where a support user tries to connect on behalf a nonexistent account
                 if (accountIdEmpty || !string.IsNullOrEmpty(await accountsService.GetAccountOwnerUserName(accountId)))
