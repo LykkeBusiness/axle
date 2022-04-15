@@ -28,7 +28,6 @@ namespace Axle.Persistence
             DeviceKey = deviceKey;
         }
 
-        [SerializationConstructor]
         public Session(
             string userName,
             int sessionId,
