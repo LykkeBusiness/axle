@@ -18,8 +18,8 @@ namespace Axle.Extensions
                 isConcurrentConnection = false;
 
             return isSupportUser
-                ? CreateConnectionParameters<SupportWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection)
-                : CreateConnectionParameters<InvestorWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection);
+                ? (WebSocketConnectionParameters) CreateConnectionParameters<SupportWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection)
+                : (WebSocketConnectionParameters) CreateConnectionParameters<InvestorWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection);
         }
 
         public static bool IsAccountIdEmpty(this IQueryCollection query)
