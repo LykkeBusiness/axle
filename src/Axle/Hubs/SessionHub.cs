@@ -52,11 +52,9 @@ namespace Axle.Hubs
                 throw new UserClaimIsEmptyException("client_id");
             }
 
-            var connectionParameters = Query.ValidateWebSocketConnection();
+            var connectionParameters = Query.ValidateWebSocketConnection(IsSupportUser);
             
-            var isSupportUser = Context.User.IsSupportUser(Query.IsAccountIdEmpty());
-
-            await hubConnectionService.OpenConnection(Context, userName, clientId, isSupportUser, connectionParameters);
+            await hubConnectionService.OpenConnection(Context, userName, clientId, connectionParameters);
 
             Log.Information($"New connection established. User: {userName}, ID: {Context.ConnectionId}.");
         }
@@ -104,5 +102,7 @@ namespace Axle.Hubs
         }
 
         protected IQueryCollection Query => Context.GetHttpContext().Request.Query;
+
+        protected bool IsSupportUser => Context.User.IsSupportUser(Query.IsAccountIdEmpty());
     }
 }

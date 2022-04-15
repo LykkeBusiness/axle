@@ -14,7 +14,6 @@ namespace Axle.Services
             HubCallerContext context,
             string userName,
             string clientId,
-            bool isSupportUser,
             WebSocketConnectionParameters connectionParameters);
 
         void CloseConnection(string connectionId);
