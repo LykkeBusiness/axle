@@ -46,7 +46,7 @@ namespace Axle.HostedServices
         {
             var otherTabsNotification = MessagePackSerializer.Deserialize<TerminateOtherTabsNotification>(value);
 
-            var connections = hubConnectionService.FindByAccessToken(otherTabsNotification.AccessToken);
+            var connections = hubConnectionService.FindByDeviceSessionKey(otherTabsNotification.DeviceSessionKey);
 
             if (otherTabsNotification.OriginatingServiceId == AxleConstants.ServiceId)
             {

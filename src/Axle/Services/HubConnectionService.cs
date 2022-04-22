@@ -59,7 +59,7 @@ namespace Axle.Services
             {
                 var terminateOtherTabs = new TerminateOtherTabsNotification
                 {
-                    AccessToken = connectionParameters.AccessToken,
+                    DeviceSessionKey = connectionParameters.DeviceSessionKey,
                     OriginatingConnectionId = context.ConnectionId,
                     OriginatingServiceId = AxleConstants.ServiceId
                 };
@@ -89,6 +89,11 @@ namespace Axle.Services
         public IEnumerable<string> FindByAccessToken(string accessToken)
         {
             return connectionRepository.Find(context => context.GetHttpContext().Request.Query["access_token"].ToString() == accessToken).Select(x => x.Key);
+        }
+        
+        public IEnumerable<string> FindByDeviceSessionKey(string deviceSessionKey)
+        {
+            return connectionRepository.Find(context => context.GetHttpContext().Request.Query["device_session_key"].ToString() == deviceSessionKey).Select(x => x.Key);
         }
 
         public async Task TerminateConnections(TerminateConnectionReason reason, params string[] connectionIds)

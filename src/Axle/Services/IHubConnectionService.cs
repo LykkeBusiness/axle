@@ -26,6 +26,8 @@ namespace Axle.Services
 
         IEnumerable<string> FindByAccessToken(string accessToken);
 
+        IEnumerable<string> FindByDeviceSessionKey(string deviceSessionKey);
+
         Task TerminateConnections(TerminateConnectionReason reason, params string[] connectionIds);
     }
 }
