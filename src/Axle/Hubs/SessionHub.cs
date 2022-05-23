@@ -3,6 +3,7 @@
 
 using System.Security.Claims;
 using Axle.Exceptions;
+using Microsoft.AspNetCore.Http;
 
 namespace Axle.Hubs
 {
@@ -51,16 +52,9 @@ namespace Axle.Hubs
                 throw new UserClaimIsEmptyException("client_id");
             }
 
-            var query = Context.GetHttpContext().Request.Query;
-
-            var token = query["access_token"];
-            var accountId = query["account_id"];
-            if (!bool.TryParse(query["is_concurrent_connection"], out var isConcurrentConnection))
-                isConcurrentConnection = false;
-
-            var isSupportUser = Context.User.IsSupportUser(accountId);
-
-            await hubConnectionService.OpenConnection(Context, userName, accountId, clientId, token, isSupportUser, isConcurrentConnection);
+            var connectionParameters = Query.ValidateWebSocketConnection(IsSupportUser);
+            
+            await hubConnectionService.OpenConnection(Context, userName, clientId, connectionParameters);
 
             Log.Information($"New connection established. User: {userName}, ID: {Context.ConnectionId}.");
         }
@@ -78,10 +72,9 @@ namespace Axle.Hubs
         public async Task<bool> SignOut()
         {
             var userName = Context.User.FindFirst(JwtClaimTypes.Name).Value;
-            var accountId = Context.GetHttpContext().Request.Query["account_id"];
-            var isSupportUser = Context.User.IsSupportUser(accountId);
+            var isSupportUser = Context.User.IsSupportUser(Query.IsAccountIdEmpty());
 
-            var response = await sessionService.TerminateSession(userName, accountId, isSupportUser, SessionActivityType.SignOut);
+            var response = await sessionService.TerminateSession(userName, Query["account_id"], isSupportUser, SessionActivityType.SignOut);
 
             return response.Status == TerminateSessionStatus.Terminated;
         }
@@ -107,5 +100,9 @@ namespace Axle.Hubs
                     "The user does not have the required permissions.");
             }
         }
+
+        protected IQueryCollection Query => Context.GetHttpContext().Request.Query;
+
+        protected bool IsSupportUser => Context.User.IsSupportUser(Query.IsAccountIdEmpty());
     }
 }

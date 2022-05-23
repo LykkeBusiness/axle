@@ -15,6 +15,6 @@ namespace Axle.Dto
         public string OriginatingConnectionId { get; set; }
 
         [Key(2)]
-        public string AccessToken { get; set; }
+        public string DeviceSessionKey { get; set; }
     }
 }

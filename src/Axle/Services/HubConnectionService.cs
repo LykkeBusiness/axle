@@ -42,22 +42,24 @@ namespace Axle.Services
         public async Task OpenConnection(
             HubCallerContext context,
             string userName,
-            string accountId,
             string clientId,
-            string accessToken,
-            bool isSupportUser,
-            bool isConcurrentConnection)
+            WebSocketConnectionParameters connectionParameters)
         {
-            var session = await sessionService.BeginSession(userName, accountId, clientId, accessToken, isSupportUser);
+            var session = await sessionService.BeginSession(userName,
+                connectionParameters.AccountId,
+                clientId,
+                connectionParameters.AccessToken,
+                connectionParameters.IsSupportUser,
+                connectionParameters.DeviceSessionKey);
 
             connectionRepository.Add(context.ConnectionId, context);
             sessionIdRepository.Add(context.ConnectionId, session.SessionId);
 
-            if (!isConcurrentConnection)
+            if (!connectionParameters.IsConcurrentConnection)
             {
                 var terminateOtherTabs = new TerminateOtherTabsNotification
                 {
-                    AccessToken = accessToken,
+                    DeviceSessionKey = connectionParameters.DeviceSessionKey,
                     OriginatingConnectionId = context.ConnectionId,
                     OriginatingServiceId = AxleConstants.ServiceId
                 };
@@ -87,6 +89,11 @@ namespace Axle.Services
         public IEnumerable<string> FindByAccessToken(string accessToken)
         {
             return connectionRepository.Find(context => context.GetHttpContext().Request.Query["access_token"].ToString() == accessToken).Select(x => x.Key);
+        }
+        
+        public IEnumerable<string> FindByDeviceSessionKey(string deviceSessionKey)
+        {
+            return connectionRepository.Find(context => context.GetHttpContext().Request.Query["device_session_key"].ToString() == deviceSessionKey).Select(x => x.Key);
         }
 
         public async Task TerminateConnections(TerminateConnectionReason reason, params string[] connectionIds)

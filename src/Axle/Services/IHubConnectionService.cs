@@ -13,11 +13,8 @@ namespace Axle.Services
         Task OpenConnection(
             HubCallerContext context,
             string userName,
-            string accountId,
             string clientId,
-            string accessToken,
-            bool isSupportUser,
-            bool isConcurrentConnection);
+            WebSocketConnectionParameters connectionParameters);
 
         void CloseConnection(string connectionId);
 
@@ -28,6 +25,8 @@ namespace Axle.Services
         IEnumerable<string> FindBySessionId(int sessionId);
 
         IEnumerable<string> FindByAccessToken(string accessToken);
+
+        IEnumerable<string> FindByDeviceSessionKey(string deviceSessionKey);
 
         Task TerminateConnections(TerminateConnectionReason reason, params string[] connectionIds);
     }

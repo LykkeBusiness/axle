@@ -7,23 +7,37 @@ namespace Axle.Persistence
     using MessagePack;
 
     [MessagePackObject]
-    public class Session
+    public sealed class Session
     {
         [SerializationConstructor]
         public Session(
             string userName,
             int sessionId,
             string accountId,
-            string accessToken,
+            string[] accessTokens,
             string clientId,
-            bool isSupportUser)
+            bool isSupportUser,
+            string deviceKey)
         {
             UserName = userName ?? throw new ArgumentNullException(nameof(userName));
             AccountId = accountId;
-            AccessToken = accessToken ?? throw new ArgumentNullException(nameof(accessToken));
+            AccessTokens = accessTokens ?? throw new ArgumentNullException(nameof(accessTokens));
             ClientId = clientId ?? throw new ArgumentNullException(nameof(clientId));
             SessionId = sessionId;
             IsSupportUser = isSupportUser;
+            DeviceKey = deviceKey;
+        }
+
+        public Session(
+            string userName,
+            int sessionId,
+            string accountId,
+            string accessToken,
+            string clientId,
+            bool isSupportUser,
+            string deviceKey)
+            : this(userName, sessionId, accountId, new[] { accessToken }, clientId, isSupportUser, deviceKey)
+        {
         }
 
         [Key(0)]
@@ -36,12 +50,15 @@ namespace Axle.Persistence
         public string AccountId { get; }
 
         [Key(3)]
-        public string AccessToken { get; }
+        public string[] AccessTokens { get; }
 
         [Key(4)]
         public string ClientId { get; }
 
         [Key(5)]
         public bool IsSupportUser { get; }
+        
+        [Key(6)]
+        public string DeviceKey { get; }
     }
 }

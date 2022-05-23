@@ -1,6 +1,9 @@
 ﻿// Copyright (c) 2019 Lykke Corp.
 // See the LICENSE file in the project root for more information.
 
+using System.Runtime.CompilerServices;
+
+[assembly: InternalsVisibleTo("Axle.Tests.Unit")]
 namespace Axle.Persistence
 {
     using System;
@@ -26,11 +29,11 @@ namespace Axle.Persistence
 
         private static string ExpirationSetKey => "axle:expirations";
 
-        public async Task Add(Session session)
+        public async Task Add(Session entity)
         {
-            logger.LogDebug($"Trying to add new session: {nameof(session.AccountId)}:{session.AccountId}, {nameof(session.SessionId)}: {session.SessionId}..");
+            logger.LogDebug($"Trying to add new session: {nameof(entity.AccountId)}:{entity.AccountId}, {nameof(entity.SessionId)}: {entity.SessionId}..");
 
-            var serSession = MessagePackSerializer.Serialize(session);
+            var serSession = MessagePackSerializer.Serialize(entity);
             var unixNow = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
 
             var db = multiplexer.GetDatabase();
@@ -40,18 +43,18 @@ namespace Axle.Persistence
             try
             {
 #pragma warning disable 4014
-                transaction.StringSetAsync(SessionKey(session.SessionId), serSession);
+                transaction.StringSetAsync(SessionKey(entity.SessionId), serSession);
 
-                if (session.IsSupportUser)
+                if (entity.IsSupportUser)
                 {
-                    transaction.StringSetAsync(UserKey(session.UserName), session.SessionId);
+                    transaction.StringSetAsync(UserKey(entity.UserName), entity.SessionId);
                 }
                 else
                 {
-                    transaction.StringSetAsync(AccountKey(session.AccountId), session.SessionId);
+                    transaction.StringSetAsync(AccountKey(entity.AccountId), entity.SessionId);
                 }
 
-                transaction.SortedSetAddAsync(ExpirationSetKey, session.SessionId, unixNow);
+                transaction.SortedSetAddAsync(ExpirationSetKey, entity.SessionId, unixNow);
 #pragma warning restore 4014
                 if (!await transaction.ExecuteAsync())
                 {
@@ -60,25 +63,25 @@ namespace Axle.Persistence
             }
             catch (Exception exception)
             {
-                logger.LogError(exception, $"Error occured while creating new session: {nameof(session.AccountId)}:{session.AccountId}, {nameof(session.SessionId)}: {session.SessionId}.");
+                logger.LogError(exception, $"Error occured while creating new session: {nameof(entity.AccountId)}:{entity.AccountId}, {nameof(entity.SessionId)}: {entity.SessionId}.");
             }
         }
 
-        public async Task Update(Session session)
+        public async Task Update(Session entity)
         {
-            await Add(session);
+            await Add(entity);
         }
 
-        public async Task<Session> Get(int id)
+        public async Task<Session> Get(int sessionId)
         {
             var db = multiplexer.GetDatabase();
 
-            var lastUpdated = await db.SortedSetScoreAsync(ExpirationSetKey, id);
+            var lastUpdated = await db.SortedSetScoreAsync(ExpirationSetKey, sessionId);
 
             // No information about session in the expiration set - return null
             if (!lastUpdated.HasValue)
             {
-                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{id}: No information about session in the expiration set - return null");
+                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{sessionId}: No information about session in the expiration set - return null");
                 return null;
             }
 
@@ -88,17 +91,17 @@ namespace Axle.Persistence
             // Session has expired and will be removed on the next expiration check - return null
             if (lastAlive + sessionTimeout < utcNow)
             {
-                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{id}: Session has expired and will be removed on the next expiration check - return null");
+                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{sessionId}: Session has expired and will be removed on the next expiration check - return null");
                 return null;
             }
 
-            var serialized = await db.StringGetAsync(SessionKey(id));
+            var serialized = await db.StringGetAsync(SessionKey(sessionId));
 
             // Edge case - will only happen if the session gets deleted in between fetching its last update time
             // and retrieving the session itself
             if (serialized.IsNull)
             {
-                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{id}: Edge case - will only happen if the session gets deleted in between fetching its last update time and retrieving the session itself");
+                logger.LogDebug($"{nameof(RedisSessionRepository)}:{nameof(Get)}:{sessionId}: Edge case - will only happen if the session gets deleted in between fetching its last update time and retrieving the session itself");
                 return null;
             }
 
@@ -171,11 +174,11 @@ namespace Axle.Persistence
             return serializedSessions.Where(x => !x.IsNull).Select(x => MessagePackSerializer.Deserialize<Session>(x));
         }
 
-        private static string UserKey(string user) => $"axle:users:{user}";
+        internal static string UserKey(string user) => $"axle:users:{user}";
 
-        private static string AccountKey(string account) => $"axle:accounts:{account}";
+        internal static string AccountKey(string account) => $"axle:accounts:{account}";
 
-        private static string SessionKey(int session) => $"axle:sessions:{session}";
+        internal static string SessionKey(int session) => $"axle:sessions:{session}";
 
         private async Task<int?> GetSessionIdBySessionKey(RedisKey sessionKey)
         {
