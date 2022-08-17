@@ -31,7 +31,6 @@ namespace Axle.Persistence
 
         public async Task Add(Session entity)
         {
-            logger.LogInformation($"Temp log 2: {nameof(entity.AccountId)}:{entity.AccountId}, {nameof(entity.SessionId)}: {entity.SessionId}, {nameof(entity.DeviceKey)}: {entity.DeviceKey}..");
             logger.LogDebug($"Trying to add new session: {nameof(entity.AccountId)}:{entity.AccountId}, {nameof(entity.SessionId)}: {entity.SessionId}..");
 
             var serSession = MessagePackSerializer.Serialize(entity);

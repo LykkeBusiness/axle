@@ -47,7 +47,6 @@ namespace Axle.Services
             bool isSupportUser,
             string deviceKey)
         {
-            logger.LogInformation($"Temp log 1: deviceKey: {deviceKey}..");
             await slimLock.WaitAsync();
 
             try

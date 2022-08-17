@@ -45,7 +45,6 @@ namespace Axle.Services
             string clientId,
             WebSocketConnectionParameters connectionParameters)
         {
-            logger.LogInformation($"Temp log 0: deviceKey: {connectionParameters.DeviceSessionKey}..");
             var session = await sessionService.BeginSession(userName,
                 connectionParameters.AccountId,
                 clientId,
