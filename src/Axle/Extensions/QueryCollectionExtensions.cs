@@ -1,6 +1,7 @@
 using System;
 using Axle.Dto;
 using Microsoft.AspNetCore.Http;
+using Serilog;
 
 namespace Axle.Extensions
 {
@@ -17,6 +18,7 @@ namespace Axle.Extensions
             if (!bool.TryParse(query[ConcurrentConnectionParameterName], out var isConcurrentConnection))
                 isConcurrentConnection = false;
 
+            Log.Logger.Information($"Temp log -1: deviceKey: {query.Keys}... {string.Join("---", query.Keys)}... {DeviceSessionKeyParameterName}, {query[DeviceSessionKeyParameterName]}..");
             return isSupportUser
                 ? (WebSocketConnectionParameters) CreateConnectionParameters<SupportWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection)
                 : (WebSocketConnectionParameters) CreateConnectionParameters<InvestorWebSocketConnectionParameters>(query[AccountIdParameterName], query[AccessTokenParameterName], query[DeviceSessionKeyParameterName], isConcurrentConnection);
