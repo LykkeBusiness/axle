@@ -1,3 +1,7 @@
+## 2.21.0 (May 27, 2022). Nova 2. Delivery 24.
+
+* LT-3936: Use id token instead of access token to decide on session usage
+
 ## 2.20.0 (March 01, 2021). Nova 2. Delivery 8.
 
 * LT-2806: Implement "extract tab" feature
