@@ -4,6 +4,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using JetBrains.Annotations;
+using Lykke.RabbitMqBroker;
+using Lykke.RabbitMqBroker.Publisher.Serializers;
+using Lykke.RabbitMqBroker.Publisher.Strategies;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
@@ -191,12 +194,16 @@ namespace Axle
             var rabbitMqSettings = configuration.GetSection("ActivityPublisherSettings").Get<RabbitMqSubscriptionSettings>().MakeDurable();
             rabbitMqSettings.ConnectionString = configuration["ConnectionStrings:RabbitMq"];
             
-            services.AddSingleton(x => new RabbitMqPublisher<SessionActivity>(rabbitMqSettings)
-                .DisableInMemoryQueuePersistence()
-                .SetSerializer(new MessagePackMessageSerializer<SessionActivity>())
-                .SetPublishStrategy(new DefaultFanoutPublishStrategy(rabbitMqSettings))
-                .SetLogger(new LykkeLoggerAdapter<RabbitMqPublisher<SessionActivity>>(x.GetService<ILogger<RabbitMqPublisher<SessionActivity>>>()))
-                .PublishSynchronously());
+            services.AddSingleton(x =>
+            {
+                var loggerFactory = x.GetRequiredService<ILoggerFactory>();
+                return new RabbitMqPublisher<SessionActivity>(loggerFactory,
+                        rabbitMqSettings)
+                    .DisableInMemoryQueuePersistence()
+                    .SetSerializer(new MessagePackMessageSerializer<SessionActivity>())
+                    .SetPublishStrategy(new DefaultFanoutPublishStrategy(rabbitMqSettings))
+                    .PublishSynchronously();
+            });
 
             services.AddSingleton<IConnectionMultiplexer>(x => ConnectionMultiplexer.Connect(configuration.GetValue<string>("ConnectionStrings:Redis")));
 
@@ -241,6 +248,7 @@ namespace Axle
                     configuration.GetValue("IntrospectionCache:ExpirationScanFrequencyInSeconds", 60)));
 
             services.AddHttpClient();
+            services.AddDatabaseDeveloperPageExceptionFilter();
         }
 
         [UsedImplicitly]
@@ -249,11 +257,10 @@ namespace Axle
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseMigrationsEndPoint();
                 app.UseBrowserLink();
-                app.UseDatabaseErrorPage();
             }
 
-            app.UseMiddleware<LogHandlerMiddleware>();
             app.UseMiddleware<ExceptionHandlerMiddleware>();
 
             app.UseSwagger();
