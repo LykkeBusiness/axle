@@ -1,4 +1,4 @@
-## 2.22.0 Nova 2 Delivery 29 (October 31, 2022).
+## 2.22.0 Nova 2 Delivery 28 (October 31, 2022).
 
 * LT-3721: NET 6 migration
 
