@@ -1,3 +1,11 @@
+## 2.22.0 Nova 2 Delivery 29 (October 31, 2022).
+
+* LT-3721: NET 6 migration
+
+### Deployment
+* NET 6 runtime is required
+* Dockerfile is updated to use native Microsoft images (see [DockerHub](https://hub.docker.com/_/microsoft-dotnet-runtime/))
+
 ## 2.21.0 (May 27, 2022). Nova 2. Delivery 24.
 
 * LT-3936: Use id token instead of access token to decide on session usage
