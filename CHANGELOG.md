@@ -1,3 +1,6 @@
+## 2.22.1 Nova 2 Delivery 28. Hotfix 3 (December 6, 2022).
+* LT-4306: Downgrade Serilog
+
 ## 2.22.0 Nova 2 Delivery 28 (October 31, 2022).
 
 * LT-3721: NET 6 migration
