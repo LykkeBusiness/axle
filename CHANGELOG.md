@@ -1,3 +1,8 @@
+## 2.23.0 - Nova 2. Delivery 39 (January 29, 2024)
+### What's changed
+* LT-5167: Add history of releases into `changelog.md`
+
+
 ## 2.22.1 Nova 2 Delivery 28. Hotfix 3 (December 6, 2022).
 * LT-4306: Downgrade Serilog
 
@@ -379,6 +384,14 @@ A nuget package used for activities models
   ```
 
   - Added session timeout configuration. This configuration is optional if this timeout is not configured the default value will be 300 seconds
+
+  ```json
+    "SessionConfig": {
+      "TimeoutInSec": 300
+    }
+  ```
+
+  All latest configuration changes that are used and working for dev environment can be found in ```appSettings.json``` default value will be 300 seconds
 
   ```json
     "SessionConfig": {
