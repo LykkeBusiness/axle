@@ -19,12 +19,6 @@ updates:
       - "tarurar"
     reviewers:
       - "tarurar"
-    groups:
-      lykke-libraries:
-        patterns:
-          - "Lykke.*"
-          - "LykkeBiz.*"
-          - "MarginTrading.*"
     allow:
       - dependency-name: "Lykke.*"
       - dependency-name: "LykkeBiz.*"
