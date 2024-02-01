@@ -36,13 +36,13 @@ jobs:
           dotnet-version: 6.0.x
 
       - name: Restore dependencies
-        run: dotnet restore --source https://api.nuget.org/v3/index.json --source https://nuget-lykkecloud.azurewebsites.net/nuget
+        run: dotnet restore ./src --source https://api.nuget.org/v3/index.json --source https://nuget-lykkecloud.azurewebsites.net/nuget
 
       - name: Build
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build ./src --configuration Release --no-restore
 
       - name: Test
-        run: dotnet test --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
+        run: dotnet test ./src --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./coverage
 
       - name: Code Coverage Report
         uses: irongut/CodeCoverageSummary@v1.3.0
