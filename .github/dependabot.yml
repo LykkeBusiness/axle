@@ -1,0 +1,30 @@
+# Please see the documentation for all configuration options:
+# https://docs.github.com/github/administering-a-repository/configuration-options-for-dependency-updates
+
+version: 2
+registries:
+  lykke:
+    type: nuget-feed
+    url: https://nuget-lykkecloud.azurewebsites.net/nuget
+  public:
+    type: nuget-feed
+    url: https://api.nuget.org/v3/index.json
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "daily"
+    registries: "*"
+    assignees: 
+      - "tarurar"
+    reviewers:
+      - "tarurar"
+    groups:
+      lykke-libraries:
+        patterns:
+          - "Lykke*"
+          - "MarginTrading*"
+    allow:
+      - dependency-name: "Lykke*"
+      - dependency-name: "MarginTrading*"
+    open-pull-requests-limit: 10
