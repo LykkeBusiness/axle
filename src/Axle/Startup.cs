@@ -258,7 +258,6 @@ namespace Axle
             {
                 app.UseDeveloperExceptionPage();
                 app.UseMigrationsEndPoint();
-                app.UseBrowserLink();
             }
 
             app.UseMiddleware<ExceptionHandlerMiddleware>();
