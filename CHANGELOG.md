@@ -1,3 +1,7 @@
+## 2.23.1 - Nova 2. Delivery 39. Hotfix 2 (February 7, 2024)
+### What's changed
+* LT-5236: Update vulnerable packages
+
 ## 2.23.0 - Nova 2. Delivery 39 (January 29, 2024)
 ### What's changed
 * LT-5167: Add history of releases into `changelog.md`
