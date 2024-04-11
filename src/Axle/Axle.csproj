@@ -37,7 +37,7 @@
     <PackageReference Include="Lykke.MarginTrading.AccountsManagement.Contracts" Version="1.13.1" />
     <PackageReference Include="Lykke.Middlewares" Version="3.6.3" />
     <PackageReference Include="Lykke.Snow.Common.Startup" Version="3.0.1" />
-    <PackageReference Include="LykkeBiz.RabbitMqBroker" Version="9.2.6" />
+    <PackageReference Include="LykkeBiz.RabbitMqBroker" Version="12.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore"
       Version="6.0.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.10" />
