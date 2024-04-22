@@ -7,6 +7,7 @@ using JetBrains.Annotations;
 using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Publisher.Serializers;
 using Lykke.RabbitMqBroker.Publisher.Strategies;
+using Lykke.SettingsReader.SettingsTemplate;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
@@ -249,6 +250,7 @@ namespace Axle
 
             services.AddHttpClient();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSettingsTemplateGenerator();
         }
 
         [UsedImplicitly]
@@ -279,6 +281,7 @@ namespace Axle
             {
                 endpoints.MapHub<SessionHub>(SessionHub.Name);
                 endpoints.MapControllers();
+                endpoints.AddSettingsTemplateEndpoint();
             });
         }
     }
