@@ -85,6 +85,10 @@ These available variables are detailed below:
   | AuditSettings:RolesToAudit | List of Roles to audit, that are passed to [AuditHandlerMiddleware](https://bitbucket.org/lykke-snow/lykke.middlewares/src/dev/src/Lykke.Middlewares/AuditHandlerMiddleware.cs) which checks if User roles match any of the roles provided. This is an optional parameter that when not provided or provided empty means ALL roles should be audited. |
   | AuditSettings:RoutesToAudit | List of Routes to audit that are passed to [AuditHandlerMiddleware](https://bitbucket.org/lykke-snow/lykke.middlewares/src/dev/src/Lykke.Middlewares/AuditHandlerMiddleware.cs) which checks if Request matches any of the routes provided.  This is an optional parameter that when not provided or provided empty means ALL routes should be audited. |
 
+### Settings schema:
+<!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./template.json) -->
+<!-- MARKDOWN-AUTO-DOCS:END -->
+
 ### Log specific configuration
 
 - Logging mechanism in place uses Serilog with some enrichers to exposed better and more detailed logs (i.e [FromLogContext](https://github.com/serilog/serilog/wiki/Enrichment), [WithMachineName](https://github.com/serilog/serilog-enrichers-environment), [WithThreadId](https://github.com/serilog/serilog-enrichers-thread), [WithDemystifiedStackTraces](https://github.com/nblumhardt/serilog-enrichers-demystify)).
