@@ -87,6 +87,107 @@ These available variables are detailed below:
 
 ### Settings schema:
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./template.json) -->
+<!-- The below code snippet is automatically added from ./template.json -->
+```json
+{
+  "ActivityPublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean"
+  },
+  "Api-Authority": "String",
+  "Api-Name": "String",
+  "Api-Secret": "String",
+  "ApiAuthority": "String",
+  "ApiName": "String",
+  "ApiSecret": "String",
+  "API_AUTHORITY": "String",
+  "API_NAME": "String",
+  "API_SECRET": "String",
+  "ASPNETCORE_ENVIRONMENT": "String",
+  "AuditSettings": {
+    "Enabled": "Boolean",
+    "RolesToAudit": [
+      "String"
+    ],
+    "RoutesToAudit": [
+      {
+        "Method": "String",
+        "Template": "String"
+      }
+    ]
+  },
+  "BackofficeSupportMode": "Boolean",
+  "chestApiKey": "String",
+  "chestUrl": "String",
+  "CHEST_API_KEY": "String",
+  "ConnectionStrings": {
+    "RabbitMq": "String",
+    "Redis": "String"
+  },
+  "CorsOrigins": [
+    "String"
+  ],
+  "ENVIRONMENT": "String",
+  "IntrospectionCache": {
+    "DurationInSeconds": "Integer",
+    "Enabled": "Boolean",
+    "ExpirationScanFrequencyInSeconds": "Integer"
+  },
+  "mtCoreAccountsApiKey": "String",
+  "mtCoreAccountsMgmtServiceUrl": "String",
+  "REDIS_CONNECTIONSTRING": "String",
+  "Require-Https": "Boolean",
+  "RequireHttps": "Boolean",
+  "REQUIRE_HTTPS": "Boolean",
+  "SecurityGroups": [
+    {
+      "Name": "String",
+      "Permissions": [
+        "String"
+      ]
+    }
+  ],
+  "serilog": {
+    "Enrich": [
+      "String"
+    ],
+    "minimumLevel": {
+      "default": "String"
+    },
+    "Properties": {
+      "Application": "String"
+    },
+    "Using": [
+      "String"
+    ],
+    "writeTo": [
+      {
+        "Args": {
+          "configure": [
+            {
+              "Args": {
+                "outputTemplate": "String"
+              },
+              "Name": "String"
+            }
+          ]
+        },
+        "Name": "String"
+      }
+    ]
+  },
+  "SessionConfig": {
+    "TimeoutInSec": "Integer"
+  },
+  "Swagger-Client-Id": "String",
+  "SwaggerClientId": "String",
+  "TZ": "String",
+  "urls": "String",
+  "Validate-Issuer-Name": "Boolean",
+  "ValidateIssuerName": "Boolean",
+  "VALIDATE_ISSUER_NAME": "Boolean"
+}
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ### Log specific configuration
