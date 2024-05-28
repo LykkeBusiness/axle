@@ -29,6 +29,9 @@
     <EmbeddedResource Remove="wwwroot\**" />
     <None Remove="logs\**" />
     <None Remove="wwwroot\**" />
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
