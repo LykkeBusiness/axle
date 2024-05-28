@@ -5,6 +5,7 @@
     <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>
     <AspNetCoreModuleName>AspNetCoreModuleV2</AspNetCoreModuleName>
     <LangVersion>8.0</LangVersion>
+    <Version>2.24.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
