@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <TargetFramework>net8.0</TargetFramework>
@@ -22,52 +22,52 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Remove="logs\**"/>
-        <Compile Remove="wwwroot\**"/>
-        <Content Remove="wwwroot\**"/>
-        <EmbeddedResource Remove="logs\**"/>
-        <EmbeddedResource Remove="wwwroot\**"/>
-        <None Remove="logs\**"/>
-        <None Remove="wwwroot\**"/>
+        <Compile Remove="logs\**" />
+        <Compile Remove="wwwroot\**" />
+        <Content Remove="wwwroot\**" />
+        <EmbeddedResource Remove="logs\**" />
+        <EmbeddedResource Remove="wwwroot\**" />
+        <None Remove="logs\**" />
+        <None Remove="wwwroot\**" />
         <None Update="Dockerfile">
             <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </None>
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Chest.Client" Version="3.6.0"/>
-        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="3.0.1"/>
-        <PackageReference Include="Lykke.MarginTrading.AccountsManagement.Contracts" Version="1.13.1"/>
-        <PackageReference Include="Lykke.Middlewares" Version="3.6.3"/>
-        <PackageReference Include="Lykke.Snow.Common.Startup" Version="3.0.1"/>
-        <PackageReference Include="LykkeBiz.RabbitMqBroker" Version="13.6.0"/>
-        <PackageReference Include="LykkeBiz.SettingsReader" Version="8.1.2"/>
-        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10"/>
-        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0"/>
-        <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.10"/>
-        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0"/>
-        <PackageReference Include="PermissionsManagement.Client" Version="1.0.3"/>
-        <PackageReference Include="Serilog.AspNetCore" Version="6.0.1"/>
-        <PackageReference Include="Serilog.Settings.Configuration" Version="3.3.0"/>
-        <PackageReference Include="Serilog.Sinks.Async" Version="1.5.0"/>
-        <PackageReference Include="Serilog.Sinks.Console" Version="4.1.0"/>
-        <PackageReference Include="Serilog.Sinks.File" Version="5.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" Version="5.4.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.0"/>
+        <PackageReference Include="Chest.Client" />
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" />
+        <PackageReference Include="Lykke.MarginTrading.AccountsManagement.Contracts" />
+        <PackageReference Include="Lykke.Middlewares" />
+        <PackageReference Include="Lykke.Snow.Common.Startup" />
+        <PackageReference Include="LykkeBiz.RabbitMqBroker" />
+        <PackageReference Include="LykkeBiz.SettingsReader" />
+        <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+        <PackageReference Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" />
+        <PackageReference Include="Microsoft.Extensions.Configuration.CommandLine" />
+        <PackageReference Include="PermissionsManagement.Client" />
+        <PackageReference Include="Serilog.AspNetCore" />
+        <PackageReference Include="Serilog.Settings.Configuration" />
+        <PackageReference Include="Serilog.Sinks.Async" />
+        <PackageReference Include="Serilog.Sinks.Console" />
+        <PackageReference Include="Serilog.Sinks.File" />
+        <PackageReference Include="Swashbuckle.AspNetCore.Annotations" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" />
+        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" />
     </ItemGroup>
 
     <ItemGroup>
         <None Include="..\.dockerignore" Link=".dockerignore">
             <DependentUpon>Dockerfile</DependentUpon>
         </None>
-        <None Include=".\Dockerfile" Link="Dockerfile"/>
+        <None Include=".\Dockerfile" Link="Dockerfile" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Axle.Contracts\Axle.Contracts.csproj"/>
-        <ProjectReference Include="..\Axle.Dto\Axle.Dto.csproj"/>
-        <ProjectReference Include="..\Axle.Persistence\Axle.Persistence.csproj"/>
+        <ProjectReference Include="..\Axle.Contracts\Axle.Contracts.csproj" />
+        <ProjectReference Include="..\Axle.Dto\Axle.Dto.csproj" />
+        <ProjectReference Include="..\Axle.Persistence\Axle.Persistence.csproj" />
     </ItemGroup>
 
     <ItemGroup>

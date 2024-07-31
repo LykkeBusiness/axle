@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.Annotations" Version="2022.1.0" />
-    <PackageReference Include="MessagePack" Version="1.9.11" />
-    <PackageReference Include="Refit" Version="4.6.30" />
+    <PackageReference Include="JetBrains.Annotations" />
+    <PackageReference Include="MessagePack" />
+    <PackageReference Include="Refit" />
   </ItemGroup>
 
 </Project>
