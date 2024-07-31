@@ -1,43 +1,44 @@
 <Project>
-	<PropertyGroup>
-		<ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
-	</PropertyGroup>
-	<ItemGroup>
-		<PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
-		<PackageVersion Include="FluentAssertions" Version="6.7.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
-		<PackageVersion Include="xunit" Version="2.4.2" />
-		<PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
-		<PackageVersion Include="coverlet.collector" Version="3.2.0" />
-		<PackageVersion Include="FakeItEasy" Version="4.5.1" />
-		<PackageVersion Include="Moq" Version="4.18.2" />
-		<PackageVersion Include="MessagePack" Version="1.9.11" />
-		<PackageVersion Include="StackExchange.Redis" Version="2.6.70" />
-		<PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
-		<PackageVersion Include="JetBrains.Annotations" Version="2022.1.0" />
-		<PackageVersion Include="Chest.Client" Version="3.6.0" />
-		<PackageVersion Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
-		<PackageVersion Include="Lykke.MarginTrading.AccountsManagement.Contracts" Version="1.13.1" />
-		<PackageVersion Include="Lykke.Middlewares" Version="3.6.3" />
-		<PackageVersion Include="Lykke.Snow.Common.Startup" Version="3.0.1" />
-		<PackageVersion Include="LykkeBiz.RabbitMqBroker" Version="13.6.0" />
-		<PackageVersion Include="LykkeBiz.SettingsReader" Version="8.1.2" />
-		<PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
-		<PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
-		<PackageVersion Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.10" />
-		<PackageVersion Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
-		<PackageVersion Include="PermissionsManagement.Client" Version="1.0.3" />
-		<PackageVersion Include="Serilog.AspNetCore" Version="6.0.1" />
-		<PackageVersion Include="Serilog.Settings.Configuration" Version="3.3.0" />
-		<PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
-		<PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
-		<PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="5.4.1" />
-		<PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1" />
-		<PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.0" />
-		<PackageVersion Include="Refit" Version="4.6.30" />
-	</ItemGroup>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Binder" Version="8.0.2" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+    <PackageVersion Include="FluentAssertions" Version="6.7.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Client" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Json" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
+    <PackageVersion Include="xunit" Version="2.4.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="2.4.5" />
+    <PackageVersion Include="coverlet.collector" Version="3.2.0" />
+    <PackageVersion Include="FakeItEasy" Version="4.5.1" />
+    <PackageVersion Include="Moq" Version="4.18.2" />
+    <PackageVersion Include="MessagePack" Version="1.9.11" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.6.70" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="8.0.0" />
+    <PackageVersion Include="JetBrains.Annotations" Version="2022.1.0" />
+    <PackageVersion Include="Chest.Client" Version="3.6.0" />
+    <PackageVersion Include="IdentityServer4.AccessTokenValidation" Version="3.0.1" />
+    <PackageVersion Include="Lykke.MarginTrading.AccountsManagement.Contracts" Version="1.13.1" />
+    <PackageVersion Include="Lykke.Middlewares" Version="3.6.3" />
+    <PackageVersion Include="Lykke.Snow.Common.Startup" Version="3.0.1" />
+    <PackageVersion Include="LykkeBiz.RabbitMqBroker" Version="13.6.0" />
+    <PackageVersion Include="LykkeBiz.SettingsReader" Version="8.1.2" />
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="6.0.10" />
+    <PackageVersion Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="8.0.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.SignalR.Protocols.NewtonsoftJson" Version="6.0.10" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.CommandLine" Version="8.0.0" />
+    <PackageVersion Include="PermissionsManagement.Client" Version="1.0.3" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="6.0.1" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="3.3.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="1.5.0" />
+    <PackageVersion Include="Serilog.Sinks.Console" Version="4.1.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.Annotations" Version="5.4.1" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerGen" Version="5.4.1" />
+    <PackageVersion Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.3.0" />
+    <PackageVersion Include="Refit" Version="4.6.30" />
+  </ItemGroup>
 </Project>
