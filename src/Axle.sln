@@ -23,9 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Persistence", "Axle.Pe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4F97F7B6-AF25-4133-803B-57CE1411439E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Tests.Acceptance", "Tests\Axle.Tests.Acceptance\Axle.Tests.Acceptance.csproj", "{D649DAC0-2EDA-40F8-B773-1DF516854268}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Acceptance.Tests", "Tests\Axle.Acceptance.Tests\Axle.Acceptance.Tests.csproj", "{D649DAC0-2EDA-40F8-B773-1DF516854268}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Tests.Unit", "Tests\Axle.Tests.Unit\Axle.Tests.Unit.csproj", "{DA20319F-5123-4BFB-B2F6-BE67D2FBEBCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Unit.Tests", "Tests\Axle.Unit.Tests\Axle.Unit.Tests.csproj", "{DA20319F-5123-4BFB-B2F6-BE67D2FBEBCA}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Dto", "Axle.Dto\Axle.Dto.csproj", "{4F38097C-57C0-4EDB-95BC-8E2A1B1DCB09}"
 EndProject

@@ -6,7 +6,7 @@ using Microsoft.Extensions.Logging;
 using Moq;
 using Xunit;
 
-namespace Axle.Tests.Unit
+namespace Axle.Unit.Tests
 {
     public class SessionServiceTests
     {
