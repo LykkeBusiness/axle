@@ -1,8 +1,11 @@
+## 2.25.0 - Nova 2. Delivery 44 (August 15, 2024)
+### What's changed
+* LT-5529: Update rabbitmq broker library with new rabbitmq.client and templates.
+
+
 ## 2.24.0 - Nova 2. Delivery 40 (February 28, 2024)
 ### What's changed
 * LT-5197: Update lykke.httpclientgenerator to 5.6.2.
-
-
 
 
 ## 2.23.1 - Nova 2. Delivery 39. Hotfix 2 (February 7, 2024)
