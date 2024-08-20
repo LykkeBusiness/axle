@@ -20,6 +20,8 @@ namespace Axle.Services
 
         Task<OnBehalfChangeResponse> UpdateOnBehalfState(int sessionId, string onBehalfAccount);
 
+        Task<bool> RemoveOnBehalfState(int sessionId, string onBehalfAccount);
+
         Task<TerminateSessionResponse> TerminateSession(
             string userName,
             string accountId,

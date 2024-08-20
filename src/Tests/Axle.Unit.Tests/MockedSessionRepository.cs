@@ -3,7 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Axle.Persistence;
 
-namespace Axle.Tests.Unit
+namespace Axle.Unit.Tests
 {
     public class MockedSessionRepository : InMemoryRepository<int, Session>, ISessionRepository
     {

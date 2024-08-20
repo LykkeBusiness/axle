@@ -91,6 +91,18 @@ namespace Axle.Hubs
             return sessionService.UpdateOnBehalfState(sessionId, accountId);
         }
 
+        public Task<bool> SetOffBehalfAccount(string accountId)
+        {
+            ThrowIfUnauthorized(matchAllPermissions: true, Permissions.OnBehalfSelection);
+
+            if (!hubConnectionService.TryGetSessionId(Context.ConnectionId, out int sessionId))
+            {
+                throw new HubException("The current connection has not been registered");
+            }
+
+            return sessionService.RemoveOnBehalfState(sessionId, accountId);
+        }
+
         private void ThrowIfUnauthorized(bool matchAllPermissions = false, params string[] permissions)
         {
             if (!Context.User.IsAuthorized(matchAllPermissions, permissions))

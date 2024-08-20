@@ -3,7 +3,7 @@
 
 using System.Runtime.CompilerServices;
 
-[assembly: InternalsVisibleTo("Axle.Tests.Unit")]
+[assembly: InternalsVisibleTo("Axle.Unit.Tests")]
 namespace Axle.Persistence
 {
     using System;
