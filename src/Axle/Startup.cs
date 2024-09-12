@@ -11,6 +11,7 @@ using Lykke.SettingsReader.SettingsTemplate;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
+using Serilog;
 
 namespace Axle
 {
@@ -251,6 +252,7 @@ namespace Axle
             services.AddHttpClient();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSettingsTemplateGenerator();
+            services.AddSerilog();
         }
 
         [UsedImplicitly]
