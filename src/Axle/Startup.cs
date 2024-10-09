@@ -8,6 +8,7 @@ using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Publisher.Serializers;
 using Lykke.RabbitMqBroker.Publisher.Strategies;
 using Lykke.SettingsReader.SettingsTemplate;
+using Lykke.Snow.Common.AssemblyLogging;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
@@ -61,6 +62,7 @@ namespace Axle
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAssemblyLogger();
             services.AddCors(o =>
             {
                 o.AddPolicy("AllowCors", p =>
@@ -256,7 +258,7 @@ namespace Axle
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -284,6 +286,23 @@ namespace Axle
                 endpoints.MapHub<SessionHub>(SessionHub.Name);
                 endpoints.MapControllers();
                 endpoints.AddSettingsTemplateEndpoint();
+            });
+            
+            appLifetime.ApplicationStarted.Register(() =>
+            {
+                var logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
+                try
+                {
+                    app.ApplicationServices.GetRequiredService<AssemblyLogger>()
+                        .StartLogging();
+                }
+                catch (Exception e)
+                {
+                    logger.LogError(e, "Failed to start");
+                    appLifetime.StopApplication();
+                    return;
+                }
+                logger.LogInformation($"{nameof(Startup)} started");
             });
         }
     }
