@@ -39,6 +39,7 @@
         <PackageReference Include="IdentityServer4.AccessTokenValidation" />
         <PackageReference Include="Lykke.MarginTrading.AccountsManagement.Contracts" />
         <PackageReference Include="Lykke.Middlewares" />
+        <PackageReference Include="Lykke.Snow.Common" />
         <PackageReference Include="Lykke.Snow.Common.Startup" />
         <PackageReference Include="LykkeBiz.RabbitMqBroker" />
         <PackageReference Include="LykkeBiz.SettingsReader" />
