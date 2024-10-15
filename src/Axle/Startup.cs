@@ -287,23 +287,6 @@ namespace Axle
                 endpoints.MapControllers();
                 endpoints.AddSettingsTemplateEndpoint();
             });
-            
-            appLifetime.ApplicationStarted.Register(() =>
-            {
-                var logger = app.ApplicationServices.GetRequiredService<ILogger<Startup>>();
-                try
-                {
-                    app.ApplicationServices.GetRequiredService<AssemblyLogger>()
-                        .StartLogging();
-                }
-                catch (Exception e)
-                {
-                    logger.LogError(e, "Failed to start");
-                    appLifetime.StopApplication();
-                    return;
-                }
-                logger.LogInformation($"{nameof(Startup)} started");
-            });
         }
     }
 }
