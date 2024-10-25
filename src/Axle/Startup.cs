@@ -1,14 +1,8 @@
 ﻿// Copyright (c) 2019 Lykke Corp.
 // See the LICENSE file in the project root for more information.
 
-using System.Collections;
-using System.Collections.Generic;
-using JetBrains.Annotations;
-using Lykke.RabbitMqBroker;
-using Lykke.RabbitMqBroker.Publisher.Serializers;
-using Lykke.RabbitMqBroker.Publisher.Strategies;
-using Lykke.SettingsReader.SettingsTemplate;
 using Lykke.Snow.Common.AssemblyLogging;
+using MessagePack;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
@@ -204,7 +198,7 @@ namespace Axle
                 return new RabbitMqPublisher<SessionActivity>(loggerFactory,
                         rabbitMqSettings)
                     .DisableInMemoryQueuePersistence()
-                    .SetSerializer(new MessagePackMessageSerializer<SessionActivity>())
+                    .SetSerializer(new MessagePackMessageSerializer<SessionActivity>((IFormatterResolver)null))
                     .SetPublishStrategy(new DefaultFanoutPublishStrategy(rabbitMqSettings))
                     .PublishSynchronously();
             });
