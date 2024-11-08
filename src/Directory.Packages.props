@@ -12,6 +12,7 @@
     <PackageVersion Include="JetBrains.Annotations" Version="2022.1.0" />
     <PackageVersion Include="Lykke.MarginTrading.AccountsManagement.Contracts" Version="8.0.1" />
     <PackageVersion Include="Lykke.Middlewares" Version="3.6.3" />
+    <PackageVersion Include="Lykke.Snow.Common" Version="5.0.1" />
     <PackageVersion Include="Lykke.Snow.Common.Startup" Version="4.1.0" />
     <PackageVersion Include="LykkeBiz.RabbitMqBroker" Version="16.0.0" />
     <PackageVersion Include="LykkeBiz.SettingsReader" Version="9.0.1" />
