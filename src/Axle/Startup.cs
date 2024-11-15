@@ -113,7 +113,7 @@ namespace Axle
             var apiSecret = configuration.GetValue<string>("Api-Secret");
             var validateIssuerName = configuration.GetValue<bool>("Validate-Issuer-Name");
             var requireHttps = configuration.GetValue<bool>("Require-Https");
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = apiName, Version = "v1"});
@@ -197,7 +197,7 @@ namespace Axle
 
             var rabbitMqSettings = configuration.GetSection("ActivityPublisherSettings").Get<RabbitMqSubscriptionSettings>().MakeDurable();
             rabbitMqSettings.ConnectionString = configuration["ConnectionStrings:RabbitMq"];
-            
+
             services.AddSingleton(x =>
             {
                 var loggerFactory = x.GetRequiredService<ILoggerFactory>();
@@ -217,7 +217,7 @@ namespace Axle
 
             services.AddSingleton<IHttpStatusCodeMapper, DefaultHttpStatusCodeMapper>();
             services.AddSingleton<ILogLevelMapper, DefaultLogLevelMapper>();
-            
+
             // AuditSettings registration for Lykke.Middlewares.AuditHandlerMiddleware
             services.AddSingleton(configuration.GetSection("AuditSettings")?.Get<AuditSettings>() ?? new AuditSettings());
 
@@ -253,8 +253,8 @@ namespace Axle
 
             services.AddHttpClient();
             services.AddDatabaseDeveloperPageExceptionFilter();
-            services.AddSettingsTemplateGenerator();
             services.AddSerilog();
+            services.AddSettingsTemplateGenerator();
         }
 
         [UsedImplicitly]
