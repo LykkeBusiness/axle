@@ -87,6 +87,215 @@ These available variables are detailed below:
 
 ### Settings schema:
 <!-- MARKDOWN-AUTO-DOCS:START (CODE:src=./template.json) -->
+<!-- The below code snippet is automatically added from ./template.json -->
+```json
+{
+  "AccountsCache": {
+    "ExpirationTimeout": "DateTime"
+  },
+  "Api-Authority": "String",
+  "Api-Name": "String",
+  "Api-Secret": "String",
+  "ApiAuthority": "String",
+  "ApiName": "String",
+  "ApiSecret": "String",
+  "API_AUTHORITY": "String",
+  "API_NAME": "String",
+  "API_SECRET": "String",
+  "APP_UID": "Integer",
+  "ASPNETCORE_ENVIRONMENT": "String",
+  "AuditSettings": {
+    "Enabled": "Boolean",
+    "RolesToAudit": [
+      "String"
+    ],
+    "RoutesToAudit": [
+      {
+        "Method": "String",
+        "Template": "String"
+      }
+    ]
+  },
+  "bigBrotherWebApiServiceUrl": "String",
+  "BrokerId": "String",
+  "ChaosKitty": {
+    "StateOfChaos": "Integer"
+  },
+  "chestApiKey": "String",
+  "chestTimeoutInSeconds": "Integer",
+  "chestUrl": "String",
+  "CHEST_API_KEY": "String",
+  "ConnectionStrings": {
+    "Nova": "String",
+    "RabbitMq": "String"
+  },
+  "CostAndChargesGenerationBatchSize": "Integer",
+  "CostAndChargesJobSettings": {
+    "JobStartTime": "DateTime",
+    "MaximumTimePerRun": "DateTime",
+    "RetryDelay": "DateTime"
+  },
+  "CqrsSettings": {
+    "ConnectionString": "String",
+    "EnvironmentName": "String",
+    "EodHealthCheckRetryDelay": "DateTime",
+    "RetryDelay": "DateTime",
+    "TaxFileRetryDelay": "DateTime"
+  },
+  "EmirReportConfiguration": {
+    "HeaderPositionsFileType": "String",
+    "HeaderSendBy": "String",
+    "HeaderSendTo": "String",
+    "HeaderTradesFileType": "String",
+    "OtherCounterPartyCountry1": "String",
+    "ReportingCounterPartyCountry1": "String",
+    "ReportingCounterPartyId1": "String"
+  },
+  "ENVIRONMENT": "String",
+  "EodSkipSnapshotProtectionKey": "String",
+  "ExtendedLoggingSettings": {
+    "TaxesLoggingEnabled": "Boolean"
+  },
+  "IntrospectionCache": {
+    "DurationInSeconds": "Integer",
+    "Enabled": "Boolean",
+    "ExpirationScanFrequencyInSeconds": "Integer"
+  },
+  "mdmApiKey": "String",
+  "mdmServiceUrl": "String",
+  "mtCoreAccountManagementServiceUrl": "String",
+  "mtCoreAccountsApiKey": "String",
+  "mtCoreAccountsMgmtApiKey": "String",
+  "mtCoreBackendApiKey": "String",
+  "mtCoreBackendServiceUrl": "String",
+  "mtCoreCommissionApiKey": "String",
+  "mtCoreCommissionServiceUrl": "String",
+  "mtCoreHistoryApiKey": "String",
+  "mtCoreHistoryServiceUrl": "String",
+  "mtCoreSettingsApiKey": "String",
+  "mtCoreSettingsServiceUrl": "String",
+  "NOVA_CONNECTIONSTRING": "String",
+  "QueueCheckerSettings": {
+    "ConnectionString": "String",
+    "QueueNames": [
+      "String"
+    ],
+    "WithPoison": "Boolean"
+  },
+  "RabbitMqChangeAccountCommandPublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean",
+    "RoutingKey": "String"
+  },
+  "RabbitMqCorporateActionsExecutedSubscriberSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean",
+    "QueueName": "String",
+    "RoutingKey": "String"
+  },
+  "RabbitMqDailyPnLCommandPublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean",
+    "RoutingKey": "String"
+  },
+  "RabbitMqEodEventPublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean"
+  },
+  "RabbitMqFxQuotePublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean"
+  },
+  "RabbitMqOvernightSwapsCommandPublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean",
+    "RoutingKey": "String"
+  },
+  "RabbitMqQuotePublisherSettings": {
+    "ExchangeName": "String",
+    "IsDurable": "Boolean"
+  },
+  "ReportsSettings": {
+    "AccountsAssetId": "String",
+    "AccountStatsNameTemplate": "String",
+    "BatchReportSaveDegreeOfParallelism": "Integer",
+    "CapitalDataNameTemplate": "String",
+    "ChargeTaxesTimeoutInSeconds": "Integer",
+    "CollectivePostingNameTemplate": "String",
+    "EmirPositionsNameTemplate": "String",
+    "EmirRefitSettings": {
+      "DeploymentDate": "DateTime",
+      "FileNameSettings": {
+        "BrokerAccountCode": "String",
+        "FileType": "String",
+        "OptionalId": "String"
+      }
+    },
+    "EmirReportFileSizeLimitBytes": "Integer",
+    "EmirTradesNameTemplate": "String",
+    "EodNameTemplate": "String",
+    "ExAnteTemplate": "String",
+    "InstrumentsNameTemplate": "String",
+    "IsdaNameTemplate": "String",
+    "LogBlockedMarginCalculation": "Boolean",
+    "MarginNameTemplate": "String",
+    "MarketMakingPresenceRatioNameTemplate": "String",
+    "MifirNameTemplate": "String",
+    "MissingTaxesNameTemplate": "String",
+    "ProfitSharingNameTemplate": "String",
+    "StartEodAfterQuotesUploaded": "Boolean",
+    "StaticDataNameTemplate": "String"
+  },
+  "Require-Https": "Boolean",
+  "RequireHttps": "Boolean",
+  "REQUIRE_HTTPS": "Boolean",
+  "SecurityGroups": [
+    {
+      "Name": "String",
+      "Permissions": [
+        "String"
+      ]
+    }
+  ],
+  "serilog": {
+    "Enrich": [
+      "String"
+    ],
+    "minimumLevel": {
+      "default": "String"
+    },
+    "Properties": {
+      "Application": "String"
+    },
+    "Using": [
+      "String"
+    ],
+    "writeTo": [
+      {
+        "Args": {
+          "configure": [
+            {
+              "Args": {
+                "outputTemplate": "String"
+              },
+              "Name": "String"
+            }
+          ]
+        },
+        "Name": "String"
+      }
+    ]
+  },
+  "StartEodAfterQuotesUploaded": "Boolean",
+  "Swagger-Client-Id": "String",
+  "SwaggerClientId": "String",
+  "SWAGGER_CLIENT_ID": "String",
+  "TZ": "String",
+  "Validate-Issuer-Name": "Boolean",
+  "ValidateIssuerName": "Boolean",
+  "VALIDATE_ISSUER_NAME": "Boolean"
+}
+```
 <!-- MARKDOWN-AUTO-DOCS:END -->
 
 ### Log specific configuration
