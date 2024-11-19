@@ -285,7 +285,7 @@ namespace Axle
             {
                 endpoints.MapHub<SessionHub>(SessionHub.Name);
                 endpoints.MapControllers();
-                endpoints.AddSettingsTemplateEndpoint();
+                endpoints.MapSettingsTemplate();
             });
         }
     }
