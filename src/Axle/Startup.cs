@@ -255,6 +255,7 @@ namespace Axle
             services.AddHttpClient();
             services.AddDatabaseDeveloperPageExceptionFilter();
             services.AddSerilog();
+            services.AddSettingsTemplateGenerator();
         }
 
         [UsedImplicitly]
@@ -285,6 +286,7 @@ namespace Axle
             {
                 endpoints.MapHub<SessionHub>(SessionHub.Name);
                 endpoints.MapControllers();
+                endpoints.MapSettingsTemplate();
             });
         }
     }
