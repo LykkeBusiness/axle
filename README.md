@@ -105,7 +105,6 @@ These available variables are detailed below:
   "API_SECRET": "String",
   "APP_UID": "Integer",
   "ASPNETCORE_ENVIRONMENT": "String",
-  "ASPNETCORE_TEST_KEY_1": "String",
   "AuditSettings": {
     "Enabled": "Boolean",
     "RolesToAudit": [
@@ -186,7 +185,6 @@ These available variables are detailed below:
   },
   "Swagger-Client-Id": "String",
   "SwaggerClientId": "String",
-  "TEST_KEY_1": "String",
   "TZ": "String",
   "Validate-Issuer-Name": "Boolean",
   "ValidateIssuerName": "Boolean",
