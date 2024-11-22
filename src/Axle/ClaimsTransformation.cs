@@ -36,7 +36,7 @@ namespace Axle
                 claims.Add(new Claim(JwtClaimTypes.Name, principal.FindFirst(JwtClaimTypes.ClientId).Value));
             }
 
-            if (!principal.HasClaim(claim => claim.Type == AuthorizationClaims.Accounts))
+            if (!principal.HasClaim(claim => claim.Type == Constants.AuthorizationClaims.Accounts))
             {
                 var subject = principal.FindFirst(JwtClaimTypes.Subject)?.Value;
 
@@ -46,7 +46,7 @@ namespace Axle
 
                     foreach (var account in accounts)
                     {
-                        claims.Add(new Claim(AuthorizationClaims.Accounts, account, ClaimValueTypes.String));
+                        claims.Add(new Claim(Constants.AuthorizationClaims.Accounts, account, ClaimValueTypes.String));
                     }
                 }
             }
