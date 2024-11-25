@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,12 +12,9 @@
     <Version>2.27.0</Version>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Axle.Contracts" />
     <PackageReference Include="Microsoft.Extensions.Configuration" />
     <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Axle.Contracts\Axle.Contracts.csproj" />
   </ItemGroup>
 
 </Project>
