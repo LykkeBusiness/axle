@@ -91,7 +91,7 @@ namespace Axle.Hubs
             return sessionService.UpdateOnBehalfState(sessionId, accountId);
         }
 
-        public Task<bool> SetOffBehalfAccount(string accountId)
+        public Task<bool> SetOffOnBehalfAccount(string accountId)
         {
             ThrowIfUnauthorized(matchAllPermissions: true, Permissions.OnBehalfSelection);
 
