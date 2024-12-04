@@ -155,36 +155,27 @@ namespace Axle.Services
 
         public async Task<bool> RemoveOnBehalfState(int sessionId, string onBehalfAccount)
         {
-            slimLock.Wait();
+            var session = await sessionRepository.Get(sessionId);
 
-            try
+            if (session == null || !session.IsSupportUser || session.AccountId != onBehalfAccount)
             {
-                var session = await sessionRepository.Get(sessionId);
+                return false;
+            }
 
-                if (session == null || !session.IsSupportUser || session.AccountId != onBehalfAccount)
+            if (!string.IsNullOrEmpty(onBehalfAccount))
+            {
+                var onBehalfOwner = await accountsService.GetAccountOwnerUserName(onBehalfAccount);
+
+                if (string.IsNullOrEmpty(onBehalfOwner))
                 {
                     return false;
                 }
-
-                if (!string.IsNullOrEmpty(onBehalfAccount))
-                {
-                    var onBehalfOwner = await accountsService.GetAccountOwnerUserName(onBehalfAccount);
-
-                    if (string.IsNullOrEmpty(onBehalfOwner))
-                    {
-                        return false;
-                    }
-                }
-
-                await sessionRepository.Remove(sessionId, session.UserName, session.AccountId);
-                await MakeAndPublishOnBehalfActivity(SessionActivityType.OnBehalfSupportDisconnected, session);
-
-                return true;
             }
-            finally
-            {
-                slimLock.Release();
-            }
+
+            await sessionRepository.Remove(sessionId, session.UserName, session.AccountId);
+            await MakeAndPublishOnBehalfActivity(SessionActivityType.OnBehalfSupportDisconnected, session);
+
+            return true;
         }
 
         public async Task<TerminateSessionResponse> TerminateSession(
