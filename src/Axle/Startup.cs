@@ -8,9 +8,12 @@ using Lykke.RabbitMqBroker;
 using Lykke.RabbitMqBroker.Publisher.Serializers;
 using Lykke.RabbitMqBroker.Publisher.Strategies;
 using Lykke.SettingsReader.SettingsTemplate;
+using Lykke.Snow.Common.AssemblyLogging;
+using MessagePack;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using PermissionsManagement.Client.Dto;
+using Serilog;
 
 namespace Axle
 {
@@ -60,6 +63,7 @@ namespace Axle
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAssemblyLogger();
             services.AddCors(o =>
             {
                 o.AddPolicy("AllowCors", p =>
@@ -110,7 +114,7 @@ namespace Axle
             var apiSecret = configuration.GetValue<string>("Api-Secret");
             var validateIssuerName = configuration.GetValue<bool>("Validate-Issuer-Name");
             var requireHttps = configuration.GetValue<bool>("Require-Https");
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo {Title = apiName, Version = "v1"});
@@ -194,14 +198,14 @@ namespace Axle
 
             var rabbitMqSettings = configuration.GetSection("ActivityPublisherSettings").Get<RabbitMqSubscriptionSettings>().MakeDurable();
             rabbitMqSettings.ConnectionString = configuration["ConnectionStrings:RabbitMq"];
-            
+
             services.AddSingleton(x =>
             {
                 var loggerFactory = x.GetRequiredService<ILoggerFactory>();
                 return new RabbitMqPublisher<SessionActivity>(loggerFactory,
                         rabbitMqSettings)
                     .DisableInMemoryQueuePersistence()
-                    .SetSerializer(new MessagePackMessageSerializer<SessionActivity>())
+                    .SetSerializer(new MessagePackMessageSerializer<SessionActivity>((IFormatterResolver)null))
                     .SetPublishStrategy(new DefaultFanoutPublishStrategy(rabbitMqSettings))
                     .PublishSynchronously();
             });
@@ -214,7 +218,7 @@ namespace Axle
 
             services.AddSingleton<IHttpStatusCodeMapper, DefaultHttpStatusCodeMapper>();
             services.AddSingleton<ILogLevelMapper, DefaultLogLevelMapper>();
-            
+
             // AuditSettings registration for Lykke.Middlewares.AuditHandlerMiddleware
             services.AddSingleton(configuration.GetSection("AuditSettings")?.Get<AuditSettings>() ?? new AuditSettings());
 
@@ -250,11 +254,12 @@ namespace Axle
 
             services.AddHttpClient();
             services.AddDatabaseDeveloperPageExceptionFilter();
+            services.AddSerilog();
             services.AddSettingsTemplateGenerator();
         }
 
         [UsedImplicitly]
-        public void Configure(IApplicationBuilder app, IHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostEnvironment env, IApplicationLifetime appLifetime)
         {
             if (env.IsDevelopment())
             {
@@ -281,7 +286,7 @@ namespace Axle
             {
                 endpoints.MapHub<SessionHub>(SessionHub.Name);
                 endpoints.MapControllers();
-                endpoints.AddSettingsTemplateEndpoint();
+                endpoints.MapSettingsTemplate();
             });
         }
     }

@@ -98,7 +98,7 @@ namespace Axle
             }
             finally
             {
-                Log.CloseAndFlush();
+                await Log.CloseAndFlushAsync();
             }
         }
 
@@ -113,8 +113,7 @@ namespace Axle
                         {
                             cfg.AddEnvironmentSecrets<Startup>(EnvironmentSecretConfig);
                         })
-                        .UseStartup<Startup>()
-                        .UseSerilog();
+                        .UseStartup<Startup>();
                 }).Build();
         }
     }
