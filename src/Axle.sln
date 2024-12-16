@@ -30,9 +30,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Dto", "Axle.Dto\Axle.D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Contracts", "Axle.Contracts\Axle.Contracts.csproj", "{CE66203D-0B96-451B-AF76-664D830E4F11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Tests.Acceptance", "Tests\Axle.Tests.Acceptance\Axle.Tests.Acceptance.csproj", "{DF7FFA45-266F-49AC-990A-B1CA8AF2D314}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Acceptance.Tests", "Tests\Axle.Acceptance.Tests\Axle.Acceptance.Tests.csproj", "{DF7FFA45-266F-49AC-990A-B1CA8AF2D314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Tests.Unit", "Tests\Axle.Tests.Unit\Axle.Tests.Unit.csproj", "{21AB5794-2D69-47A2-8069-E71253566A88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Unit.Tests", "Tests\Axle.Unit.Tests\Axle.Unit.Tests.csproj", "{21AB5794-2D69-47A2-8069-E71253566A88}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

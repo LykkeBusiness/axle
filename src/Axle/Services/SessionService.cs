@@ -153,6 +153,31 @@ namespace Axle.Services
             }
         }
 
+        public async Task<bool> RemoveOnBehalfState(int sessionId, string onBehalfAccount)
+        {
+            var session = await sessionRepository.Get(sessionId);
+
+            if (session == null || !session.IsSupportUser || session.AccountId != onBehalfAccount)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(onBehalfAccount))
+            {
+                var onBehalfOwner = await accountsService.GetAccountOwnerUserName(onBehalfAccount);
+
+                if (string.IsNullOrEmpty(onBehalfOwner))
+                {
+                    return false;
+                }
+            }
+
+            await sessionRepository.Remove(sessionId, session.UserName, session.AccountId);
+            await MakeAndPublishOnBehalfActivity(SessionActivityType.OnBehalfSupportDisconnected, session);
+
+            return true;
+        }
+
         public async Task<TerminateSessionResponse> TerminateSession(
             string userName,
             string accountId,
