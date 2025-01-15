@@ -2,10 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <Version>2.26.0</Version>
+    <Version>2.28.0</Version>
     <IncludeSourceRevisionInInformationalVersion>false</IncludeSourceRevisionInInformationalVersion>
   </PropertyGroup>
-  
+
   <ItemGroup>
     <PackageReference Include="MessagePack" />
     <PackageReference Include="StackExchange.Redis" />

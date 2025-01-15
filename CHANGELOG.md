@@ -1,3 +1,16 @@
+## 2.28.0 - Nova 2. Delivery 48 (December 20, 2024)
+### What's changed
+* LT-5936: Update refit to 8.x version.
+* LT-5671: Axle: add new socket method to remove on behalf state.
+* LT-5469: Keep schema for appsettings.json up to date.
+
+
+## 2.27.0 - Nova 2. Delivery 47 (November 15, 2024)
+### What's changed
+* LT-5840: Update messagepack to 2.x version.
+* LT-5744: Add assembly load logger.
+
+
 ## 2.26.0 - Nova 2. Delivery 46 (September 26, 2024)
 ### What's changed
 * LT-5599: Migrate to net 8.
