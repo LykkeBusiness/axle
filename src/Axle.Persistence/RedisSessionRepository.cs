@@ -201,14 +201,8 @@ namespace Axle.Persistence
             var transaction = db.CreateTransaction();
 
             transaction.AddCondition(Condition.StringEqual(key, value));
-#pragma warning disable 4014
-            transaction.KeyDeleteAsync(key);
-#pragma warning restore 4014
-
-            if (!await transaction.ExecuteAsync())
-            {
-                logger.LogWarning($"{nameof(RedisSessionRepository)}:{nameof(RemoveKeyIfEquals)}: failed to commit transaction.");
-            }
+            var deleteTask = transaction.KeyDeleteAsync(key);
+            await transaction.ExecuteAsync();
         }
     }
 }
