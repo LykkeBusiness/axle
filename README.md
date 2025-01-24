@@ -136,7 +136,7 @@ These available variables are detailed below:
     "Enabled": "Boolean",
     "ExpirationScanFrequencyInSeconds": "Integer"
   },
-  "mtCoreAccountsApiKey": "String",
+  "MTCOREACCOUNTSAPIKEY": "String",
   "mtCoreAccountsMgmtServiceUrl": "String",
   "RABBITMQ_CONNECTIONSTRING": "String",
   "REDIS_CONNECTIONSTRING": "String",
