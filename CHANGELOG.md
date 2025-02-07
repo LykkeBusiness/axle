@@ -1,3 +1,8 @@
+## 2.29.0 - Nova 2. Delivery 49 (February 07, 2025)
+### What's changed
+* LT-5701: A lot of warnings in the log of service.
+
+
 ## 2.28.0 - Nova 2. Delivery 48 (December 20, 2024)
 ### What's changed
 * LT-5936: Update refit to 8.x version.
